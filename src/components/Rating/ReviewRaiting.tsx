@@ -1,5 +1,5 @@
 import React from 'react';
-import {commentStars} from '../utils/const.ts';
+import {commentStars} from '../../utils/const.ts';
 
 
 type IReviewRatingProps = {
