@@ -1,8 +1,9 @@
 import React from 'react';
-import {PlaceCard, PlaceCardProps} from '../pages/PlaceCard/PlaceCard.tsx';
+import {PlaceCard} from '../../components/PlaceCard/PlaceCard.tsx';
+import {TPlaceCard} from '../../utils/types.ts';
 
 type MainProps = {
-  places: PlaceCardProps[];
+  places: TPlaceCard[];
 };
 
 export const Main: React.FC<MainProps> = ({places}) => (
@@ -95,7 +96,7 @@ export const Main: React.FC<MainProps> = ({places}) => (
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              { places.map((place) => (<PlaceCard key={place.name} {...place} />)) }
+              { places.map((place) => (<PlaceCard key={place.name} place={place} />)) }
             </div>
           </section>
           <div className="cities__right-section">
