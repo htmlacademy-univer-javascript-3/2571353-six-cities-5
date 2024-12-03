@@ -1,4 +1,4 @@
-export const OfferNotLogged = () => (
+export const Offer = () => (
   <div className="page">
     <header className="header">
       <div className="container">
@@ -14,7 +14,13 @@ export const OfferNotLogged = () => (
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__login">Sign in</span>
+                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__favorite-count">3</span>
+                </a>
+              </li>
+              <li className="header__nav-item">
+                <a className="header__nav-link" href="#">
+                  <span className="header__signout">Sign out</span>
                 </a>
               </li>
             </ul>
@@ -58,7 +64,7 @@ export const OfferNotLogged = () => (
               </h1>
               <button className="offer__bookmark-button button" type="button">
                 <svg className="offer__bookmark-icon" width="31" height="33">
-                  <use xlinkHref="#icon-bookmark"></use>
+                  <use xlinkHref="#icon-bookmark"/>
                 </svg>
                 <span className="visually-hidden">To bookmarks</span>
               </button>
@@ -124,7 +130,9 @@ export const OfferNotLogged = () => (
               <h2 className="offer__host-title">Meet the host</h2>
               <div className="offer__host-user user">
                 <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                  <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74"
+                    alt="Host avatar"
+                  />
                 </div>
                 <span className="offer__user-name">
                     Angelina
@@ -150,7 +158,9 @@ export const OfferNotLogged = () => (
                 <li className="reviews__item">
                   <div className="reviews__user user">
                     <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                      <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar"/>
+                      <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54"
+                        alt="Reviews avatar"
+                      />
                     </div>
                     <span className="reviews__user-name">
                         Max
@@ -171,6 +181,66 @@ export const OfferNotLogged = () => (
                   </div>
                 </li>
               </ul>
+              <form className="reviews__form form" action="#" method="post">
+                <label className="reviews__label form__label" htmlFor="review">Your review</label>
+                <div className="reviews__rating-form form__rating">
+                  <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars"
+                    type="radio"
+                  />
+                  <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
+                    <svg className="form__star-image" width="37" height="33">
+                      <use xlinkHref="#icon-star"/>
+                    </svg>
+                  </label>
+
+                  <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars"
+                    type="radio"
+                  />
+                  <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
+                    <svg className="form__star-image" width="37" height="33">
+                      <use xlinkHref="#icon-star"/>
+                    </svg>
+                  </label>
+
+                  <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars"
+                    type="radio"
+                  />
+                  <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
+                    <svg className="form__star-image" width="37" height="33">
+                      <use xlinkHref="#icon-star"/>
+                    </svg>
+                  </label>
+
+                  <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars"
+                    type="radio"
+                  />
+                  <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
+                    <svg className="form__star-image" width="37" height="33">
+                      <use xlinkHref="#icon-star"/>
+                    </svg>
+                  </label>
+
+                  <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star"
+                    type="radio"
+                  />
+                  <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+                    <svg className="form__star-image" width="37" height="33">
+                      <use xlinkHref="#icon-star"/>
+                    </svg>
+                  </label>
+                </div>
+                <textarea className="reviews__textarea form__textarea" id="review" name="review"
+                  placeholder="Tell how was your stay, what you like and what can be improved"
+                >
+                </textarea>
+                <div className="reviews__button-wrapper">
+                  <p className="reviews__help">
+                    To submit review please make sure to set <span className="reviews__star">rating</span> and describe
+                    your stay with at least <b className="reviews__text-amount">50 characters</b>.
+                  </p>
+                  <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+                </div>
+              </form>
             </section>
           </div>
         </div>
@@ -192,9 +262,11 @@ export const OfferNotLogged = () => (
                     <b className="place-card__price-value">&euro;80</b>
                     <span className="place-card__price-text">&#47;&nbsp;night</span>
                   </div>
-                  <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+                  <button className="place-card__bookmark-button place-card__bookmark-button--active button"
+                    type="button"
+                  >
                     <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
+                      <use xlinkHref="#icon-bookmark"/>
                     </svg>
                     <span className="visually-hidden">In bookmarks</span>
                   </button>
@@ -215,7 +287,9 @@ export const OfferNotLogged = () => (
             <article className="near-places__card place-card">
               <div className="near-places__image-wrapper place-card__image-wrapper">
                 <a href="#">
-                  <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
+                  <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200"
+                    alt="Place image"
+                  />
                 </a>
               </div>
               <div className="place-card__info">
@@ -226,7 +300,7 @@ export const OfferNotLogged = () => (
                   </div>
                   <button className="place-card__bookmark-button button" type="button">
                     <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
+                      <use xlinkHref="#icon-bookmark"/>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
                   </button>
@@ -261,7 +335,7 @@ export const OfferNotLogged = () => (
                   </div>
                   <button className="place-card__bookmark-button button" type="button">
                     <svg className="place-card__bookmark-icon" width="18" height="19">
-                      <use xlinkHref="#icon-bookmark"></use>
+                      <use xlinkHref="#icon-bookmark"/>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
                   </button>
