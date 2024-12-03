@@ -1,6 +1,6 @@
 import React from 'react';
-import {PlaceCard} from '../../components/PlaceCard/PlaceCard.tsx';
 import {TPlaceCard} from '../../utils/types.ts';
+import {OfferList} from '../../components/OfferList/OfferList.tsx';
 
 type MainProps = {
   places: TPlaceCard[];
@@ -79,7 +79,7 @@ export const Main: React.FC<MainProps> = ({places}) => (
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{places.length} places to stay in Amsterdam</b>
+            <b className="places__found">{places?.length} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -95,9 +95,7 @@ export const Main: React.FC<MainProps> = ({places}) => (
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              { places.map((place) => (<PlaceCard key={place.name} place={place} />)) }
-            </div>
+            <OfferList offers={places}/>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>

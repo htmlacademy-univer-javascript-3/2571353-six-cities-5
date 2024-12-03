@@ -1,23 +1,42 @@
-import React from 'react';
+import React, {MouseEventHandler} from 'react';
 import {TPlaceCard} from '../../utils/types.ts';
+import {Link} from 'react-router-dom';
 
 interface IPlaceCardProps {
   place: TPlaceCard;
+  isFullSize: boolean;
+  onMouseOver?: MouseEventHandler;
+  onMouseLeave?: MouseEventHandler;
 }
 
-export const PlaceCard: React.FC<IPlaceCardProps> = ({place}) => (
-  <article className="cities__card place-card">
+export const PlaceCard: React.FC<IPlaceCardProps> = ({
+  place,
+  isFullSize,
+  onMouseOver,
+  onMouseLeave
+}) => (
+  <article
+    className={`${isFullSize ? 'cities__card' : 'favorites__card'} place-card`}
+    onMouseOver={onMouseOver}
+    onMouseLeave={onMouseLeave}
+  >
     {place.isPremium && (
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
     )}
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className={`${isFullSize ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}>
       <a href="#">
-        <img className="place-card__image" src={place.imageSrc} width="260" height="200" alt={place.imageAlt} />
+        <img
+          className="place-card__image"
+          src={place.imageSrc}
+          width={isFullSize ? '260' : '150'}
+          height={isFullSize ? '200' : '110'}
+          alt={place.imageAlt}
+        />
       </a>
     </div>
-    <div className="place-card__info">
+    <div className={`${isFullSize ? null : 'favorites__card-info'} place-card__info`}>
       <div className="place-card__price-wrapper">
         <div className="place-card__price">
           <b className="place-card__price-value">&euro;{place.price}</b>
@@ -37,7 +56,7 @@ export const PlaceCard: React.FC<IPlaceCardProps> = ({place}) => (
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{place.name}</a>
+        <Link to={`/offer/${place.id}`}>{place.name}</Link>
       </h2>
       <p className="place-card__type">{place.type}</p>
     </div>

@@ -8,22 +8,23 @@ import {NotFound} from './pages/NotFoundPage/NotFound.tsx';
 import {AppRoute} from './utils/const.ts';
 import {PrivateRoute} from './PrivateRoute.tsx';
 import {TPlaceCard} from './utils/types.ts';
+import {favorites} from './mocks/favorites.ts';
 
 interface IAppProps {
-  places: TPlaceCard[];
+  offers: TPlaceCard[];
 }
 
-export const App: React.FC<IAppProps> = ({places}): JSX.Element => {
+export const App: React.FC<IAppProps> = ({offers}): JSX.Element => {
   const isAuthenticated = false;
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<Main places={places} />} />
+        <Route path={AppRoute.Main} element={<Main places={offers} />} />
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute isAuthenticated={isAuthenticated}>
-            <Favorites />
+            <Favorites places={favorites} />
           </PrivateRoute>
         }
         />
