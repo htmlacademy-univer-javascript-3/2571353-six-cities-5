@@ -1,10 +1,9 @@
 import {ReviewsList} from '../../components/ReviewList/ReviewsList.tsx';
 import {REVIEWS} from '../../mocks/reviews.ts';
-import {cities} from '../../mocks/cities.ts';
 import {Map} from '../../components/map/map.tsx';
-import {offers} from '../../mocks/offers.ts';
+import {offersMock} from '../../mocks/offersMock.ts';
 import {OfferList} from '../../components/OfferList/OfferList.tsx';
-import {PlaceClassTypes} from '../../utils/const.ts';
+import {CITIES, PlaceClassTypes} from '../../utils/const.ts';
 import {useState} from 'react';
 import {TPlaceCard} from '../../utils/types.ts';
 
@@ -12,7 +11,7 @@ export const Offer = () => {
   const [selectedPlace, setSelectedPlace] = useState<TPlaceCard | undefined>(undefined);
 
   const handleListItemHover = (placeItemId: number | null) => {
-    const currentPlace = offers.find((place) => place.id === placeItemId);
+    const currentPlace = offersMock.find((place) => place.id === placeItemId);
     setSelectedPlace(currentPlace);
   };
 
@@ -175,14 +174,14 @@ export const Offer = () => {
             </div>
           </div>
           <section className="offer__map map">
-            <Map city={cities[0]} places={offers} selectedPlace={selectedPlace}/>
+            <Map city={CITIES.Amsterdam} places={offersMock} selectedPlace={selectedPlace}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers} onListItemHover={handleListItemHover} listType={PlaceClassTypes.NearPlaces}/>
+              <OfferList offers={offersMock} onListItemHover={handleListItemHover} listType={PlaceClassTypes.NearPlaces}/>
             </div>
           </section>
         </div>

@@ -1,4 +1,5 @@
 import {TPlaceCard} from '../utils/types.ts';
+import {CITIES} from '../utils/const.ts';
 
 export const favorites: TPlaceCard[] = [
   {
@@ -13,7 +14,8 @@ export const favorites: TPlaceCard[] = [
     location: {
       latitude: 52.3809553943508,
       longitude: 4.939309666406198
-    }
+    },
+    city: CITIES.Amsterdam
   },
   {
     id: 2,
@@ -26,7 +28,8 @@ export const favorites: TPlaceCard[] = [
     location: {
       latitude: 52.3609553943508,
       longitude: 4.85309666406198
-    }
+    },
+    city: CITIES.Amsterdam
   },
   {
     id: 3,
@@ -39,6 +42,7 @@ export const favorites: TPlaceCard[] = [
     location: {
       latitude: 52.3909553943508,
       longitude: 4.85309666406198
-    }
+    },
+    city: CITIES.Amsterdam
   }
 ];
