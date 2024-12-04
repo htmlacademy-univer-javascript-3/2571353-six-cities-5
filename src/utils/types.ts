@@ -29,6 +29,7 @@ export type TCity = {
 export type TPoint = {
   latitude: number;
   longitude: number;
+  zoom?: number;
 }
 
 type TUser = {

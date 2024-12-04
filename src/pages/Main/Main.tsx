@@ -1,14 +1,16 @@
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
 import {TPlaceCard} from '../../utils/types.ts';
 import {OfferList} from '../../components/OfferList/OfferList.tsx';
 import {Map} from '../../components/map/map.tsx';
-import {PlaceClassTypes} from '../../utils/const.ts';
+import {PlaceClassTypes, SortName} from '../../utils/const.ts';
 import {CityList} from '../../components/city-list/CityList.tsx';
 import {useAppSelector} from '../../store/hooks.ts';
+import {SortFilter} from '../../components/sort-filter/SortFilter.tsx';
 
 export const Main = () => {
 
   const [selectedPlace, setSelectedPlace] = useState<TPlaceCard | undefined>(undefined);
+  const [currentFilter, setCurrentFilter] = useState<SortName>(SortName.POPULAR);
 
   const currentCity = useAppSelector((state) => state.city);
   const currentOffers = useAppSelector((state) => state.offers);
@@ -17,6 +19,23 @@ export const Main = () => {
     const currentPlace = currentOffers.find((place) => place.id === placeItemId);
     setSelectedPlace(currentPlace);
   };
+
+  const onFilterChange = (filter: SortName) => {
+    setCurrentFilter(filter);
+  };
+
+  const sortedOffers = useMemo(() => {
+    switch (currentFilter) {
+      case SortName.TOP_RATED:
+        return currentOffers.toSorted((a, b) => b.rating - a.rating);
+      case SortName.HIGH_TO_LOW:
+        return currentOffers.toSorted((a, b) => b.price - a.price);
+      case SortName.LOW_TO_HIGH:
+        return currentOffers.toSorted((a, b) => a.price - b.price);
+      default:
+        return currentOffers;
+    }
+  }, [currentOffers, currentFilter]);
 
   return (
     <div className="page page--gray page--main">
@@ -61,22 +80,8 @@ export const Main = () => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentOffers?.length} places to stay in {currentCity.name}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"/>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-              <OfferList offers={currentOffers} onListItemHover={handleListItemHover} listType={PlaceClassTypes.Cities}/>
+              <SortFilter currentFilter={currentFilter} onFilterChange={onFilterChange}/>
+              <OfferList offers={sortedOffers} onListItemHover={handleListItemHover} listType={PlaceClassTypes.Cities}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
