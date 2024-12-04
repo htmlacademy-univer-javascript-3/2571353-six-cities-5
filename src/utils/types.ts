@@ -13,6 +13,7 @@ export type TPlaceCard = {
   name: string;
   type: TPlaceType;
   location: TPoint;
+  city: TCity;
 };
 
 export type TReviewFormState = {
@@ -20,7 +21,7 @@ export type TReviewFormState = {
   rating: number;
 };
 
-export type TCityObject = {
+export type TCity = {
   name: TCityName;
   location: TPoint;
 }
