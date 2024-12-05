@@ -1,15 +1,19 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, fillOffers, setOffersLoadingStatus} from './action.ts';
+import {changeCity, fillOffers, setUserData, setOffersLoadingStatus, setAuthorizationStatus} from './action.ts';
 import {CITIES} from '../utils/const.ts';
-import {TCity, TPlaceCard} from '../utils/types.ts';
+import {TCity, TPlaceCard, TUserFull} from '../utils/types.ts';
 
 type InitialState = {
+  authorizationStatus: boolean;
+  userData: TUserFull | null;
   city: TCity;
   offers: TPlaceCard[];
   isOffersDataLoading: boolean;
 };
 
 const initialState:InitialState = {
+  authorizationStatus: false,
+  userData: null,
   city: CITIES.Paris,
   offers: [],
   isOffersDataLoading: false
@@ -25,6 +29,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setUserData, (state, action) => {
+      state.userData = action.payload;
     });
 });
 
