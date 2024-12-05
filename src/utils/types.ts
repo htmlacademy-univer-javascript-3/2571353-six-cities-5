@@ -51,8 +51,23 @@ export type TReview = {
   rating: number;
 }
 
+export type TAuthData = {
+  email: string;
+  password: string;
+}
+
 export type TUser = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
 }
+
+export type TUserFull = TUser & {
+  email: string;
+  token: string;
+}
+
+export type TErrorMessage = {
+  type: string;
+  message: string;
+};
