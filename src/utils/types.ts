@@ -1,25 +1,25 @@
-export type TRating = 1 | 2 | 3 | 4 | 5;
-export type TPlaceType = 'Apartment' | 'Room';
+export type TPlaceCard = {
+  id: string;
+  title: string;
+  type: TPlaceType;
+  price: number;
+  previewImage: string;
+  city: TCity;
+  location: TPoint;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  // description: string;
+  // bedroom: number;
+  // goods: string[];
+  // host: THost;
+  // images: string[];
+  // maxAdults: number;
+};
+
+export type TPlaceType = 'apartment' | 'room' | 'house' | 'hotel';
 
 export type TCityName = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
-
-export type TPlaceCard = {
-  id: number;
-  isPremium?: boolean;
-  isBookmarked?: boolean;
-  imageSrc: string;
-  price: number;
-  rating: TRating;
-  name: string;
-  type: TPlaceType;
-  location: TPoint;
-  city: TCity;
-};
-
-export type TReviewFormState = {
-  comment: string;
-  rating: number;
-};
 
 export type TCity = {
   name: TCityName;
@@ -32,16 +32,27 @@ export type TPoint = {
   zoom?: number;
 }
 
-type TUser = {
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-}
+// export type THost = {
+//   name: string;
+//   avatarUrl: string;
+//   isPro: boolean;
+// }
+
+export type TReviewFormState = {
+  comment: string;
+  rating: number;
+};
 
 export type TReview = {
   id: number;
   date: Date;
   user: TUser;
   comment: string;
-  rating: TRating;
+  rating: number;
+}
+
+export type TUser = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
 }

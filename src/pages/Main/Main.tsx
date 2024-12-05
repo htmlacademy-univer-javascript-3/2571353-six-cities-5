@@ -6,6 +6,7 @@ import {PlaceClassTypes, SortName} from '../../utils/const.ts';
 import {CityList} from '../../components/city-list/CityList.tsx';
 import {useAppSelector} from '../../store/hooks.ts';
 import {SortFilter} from '../../components/sort-filter/SortFilter.tsx';
+import {Spinner} from '../../components/spinner/spinner.tsx';
 
 export const Main = () => {
 
@@ -14,10 +15,13 @@ export const Main = () => {
 
   const currentCity = useAppSelector((state) => state.city);
   const currentOffers = useAppSelector((state) => state.offers);
+  const isLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-  const handleListItemHover = (placeItemId: number | null) => {
+  const handleListItemHover = (placeItemId: string | null) => {
     const currentPlace = currentOffers.find((place) => place.id === placeItemId);
-    setSelectedPlace(currentPlace);
+    if (selectedPlace !== currentPlace) {
+      setSelectedPlace(currentPlace);
+    }
   };
 
   const onFilterChange = (filter: SortName) => {
@@ -25,17 +29,18 @@ export const Main = () => {
   };
 
   const sortedOffers = useMemo(() => {
+    const offers = currentOffers.filter((offer) => offer.city.name === currentCity.name);
     switch (currentFilter) {
       case SortName.TOP_RATED:
-        return currentOffers.toSorted((a, b) => b.rating - a.rating);
+        return offers.toSorted((a, b) => b.rating - a.rating);
       case SortName.HIGH_TO_LOW:
-        return currentOffers.toSorted((a, b) => b.price - a.price);
+        return offers.toSorted((a, b) => b.price - a.price);
       case SortName.LOW_TO_HIGH:
-        return currentOffers.toSorted((a, b) => a.price - b.price);
+        return offers.toSorted((a, b) => a.price - b.price);
       default:
-        return currentOffers;
+        return offers;
     }
-  }, [currentOffers, currentFilter]);
+  }, [currentOffers, currentFilter, currentCity]);
 
   return (
     <div className="page page--gray page--main">
@@ -75,21 +80,25 @@ export const Main = () => {
             <CityList />
           </section>
         </div>
+
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{currentOffers?.length} places to stay in {currentCity.name}</b>
+              <b className="places__found">{sortedOffers?.length} places to stay in {currentCity.name}</b>
               <SortFilter currentFilter={currentFilter} onFilterChange={onFilterChange}/>
-              <OfferList offers={sortedOffers} onListItemHover={handleListItemHover} listType={PlaceClassTypes.Cities}/>
+              {isLoading
+                ? <Spinner/>
+                : <OfferList offers={sortedOffers} onListItemHover={handleListItemHover} listType={PlaceClassTypes.Cities}/>}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={currentCity} places={currentOffers} selectedPlace={selectedPlace}/>
+                <Map city={currentCity} places={sortedOffers} selectedPlace={selectedPlace}/>
               </section>
             </div>
           </div>
         </div>
+
       </main>
     </div>
   );
