@@ -31,7 +31,7 @@ export const PlaceCard: React.FC<IPlaceCardProps> = ({
       <a href="#">
         <img
           className="place-card__image"
-          src={place.imageSrc}
+          src={place.previewImage}
           width={placeCardType !== PlaceClassTypes.Favorites ? '260' : '150'}
           height={placeCardType !== PlaceClassTypes.Favorites ? '200' : '110'}
           alt='Alt'
@@ -44,7 +44,7 @@ export const PlaceCard: React.FC<IPlaceCardProps> = ({
           <b className="place-card__price-value">&euro;{place.price}</b>
           <span className="place-card__price-text">&#47;&nbsp;night</span>
         </div>
-        <button className={`place-card__bookmark-button ${place.isBookmarked ? 'place-card__bookmark-button--active' : ''} button`} type="button">
+        <button className={`place-card__bookmark-button ${place.isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
           <svg className="place-card__bookmark-icon" width="18" height="19">
             <use xlinkHref="#icon-bookmark" />
           </svg>
@@ -53,7 +53,7 @@ export const PlaceCard: React.FC<IPlaceCardProps> = ({
       </div>
       <Rating rating={place.rating} objectType={OBJECT_CLASS_TYPES.Place}/>
       <h2 className="place-card__name">
-        <Link to={`/offer/${place.id}`}>{place.name}</Link>
+        <Link to={`/offer/${place.id}`}>{place.title}</Link>
       </h2>
       <p className="place-card__type">{place.type}</p>
     </div>

@@ -5,7 +5,7 @@ import {PlaceClassTypes} from '../../utils/const.ts';
 
 interface IOfferListProps {
   offers: TPlaceCard[];
-  onListItemHover: (listItemName: number | null) => void;
+  onListItemHover: (listItemName: string | null) => void;
   listType: PlaceClassTypes;
 }
 

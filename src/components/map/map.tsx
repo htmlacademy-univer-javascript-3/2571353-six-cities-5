@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import {TCity, TPlaceCard} from '../../utils/types.ts';
 import {Icon, layerGroup, Marker} from 'leaflet';
-import {URL_MARKER} from '../../utils/const.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
 
@@ -12,13 +11,13 @@ type MapProps = {
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: `${URL_MARKER}/pin.svg`,
+  iconUrl: '/img/pin.svg',
   iconSize: [27, 39],
   iconAnchor: [20, 40]
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: `${URL_MARKER}/pin-active.svg`,
+  iconUrl: '/img/pin-active.svg',
   iconSize: [27, 39],
   iconAnchor: [20, 40]
 });
@@ -40,7 +39,7 @@ export const Map: React.FC<MapProps> = (props: MapProps) => {
 
         marker
           .setIcon(
-            selectedPlace !== undefined && place.name === selectedPlace.name
+            selectedPlace !== undefined && place.id === selectedPlace.id
               ? currentCustomIcon
               : defaultCustomIcon
           )

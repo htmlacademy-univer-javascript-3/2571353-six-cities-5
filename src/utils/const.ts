@@ -26,6 +26,14 @@ export enum SortName {
   TOP_RATED = 'Top rated first',
 }
 
+export enum Actions {
+  CITY = 'City',
+  OFFERS = 'Offers',
+  OFFER = 'Offer',
+  FAVORITES = 'Favorites',
+  COMMENTS = 'Comments'
+}
+
 export const commentStars = [
   { rating: 5, title: 'perfect' },
   { rating: 4, title: 'good' },
@@ -85,4 +93,23 @@ export const CITIES: Record<TCityName, TCity> = {
   },
 };
 
-export const URL_MARKER = '/public/img/';
+export const API_ROUTES = {
+  OFFERS: {
+    ALL: '/offers',
+    EXACT: '/offers/{offerId}',
+    NEARBY: '/offers/{offerId}/nearby',
+  },
+  FAVORITE: {
+    GET: '/favorite',
+    SET_STATUS: '/favorite/{offerId}/{status}',
+  },
+  COMMENTS: {
+    GET: '/comments/{offerId}',
+    POST: '/comments/{offerId}',
+  },
+  USER: {
+    VALIDATE: '/login',
+    LOGIN: '/login',
+    LOGOUT: '/logout',
+  },
+};
