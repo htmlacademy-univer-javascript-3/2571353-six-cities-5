@@ -1,6 +1,5 @@
 import React from 'react';
 import {TReview} from '../../utils/types.ts';
-import {ReviewForm} from './ReviewForm.tsx';
 import {ReviewItem} from './ReviewItem.tsx';
 
 interface IOfferListProps {
@@ -17,6 +16,5 @@ export const ReviewsList: React.FC<IOfferListProps> = ({reviews}): JSX.Element =
         <ReviewItem key={review.id} review={review}/>
       ))}
     </ul>
-    <ReviewForm/>
   </section>
 );

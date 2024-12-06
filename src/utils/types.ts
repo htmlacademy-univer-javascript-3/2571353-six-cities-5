@@ -3,18 +3,21 @@ export type TPlaceCard = {
   title: string;
   type: TPlaceType;
   price: number;
-  previewImage: string;
+  previewImage?: string;
   city: TCity;
   location: TPoint;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  // description: string;
-  // bedroom: number;
-  // goods: string[];
-  // host: THost;
-  // images: string[];
-  // maxAdults: number;
+};
+
+export type TPlaceCardFull = TPlaceCard & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: THost;
+  images: string[];
+  maxAdults: number;
 };
 
 export type TPlaceType = 'apartment' | 'room' | 'house' | 'hotel';
@@ -32,11 +35,11 @@ export type TPoint = {
   zoom?: number;
 }
 
-// export type THost = {
-//   name: string;
-//   avatarUrl: string;
-//   isPro: boolean;
-// }
+export type THost = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
 
 export type TReviewFormState = {
   comment: string;
@@ -45,7 +48,7 @@ export type TReviewFormState = {
 
 export type TReview = {
   id: number;
-  date: Date;
+  date: string;
   user: TUser;
   comment: string;
   rating: number;

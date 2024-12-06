@@ -1,8 +1,12 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {ReviewRating} from '../Rating/ReviewRaiting.tsx';
 import {TReviewFormState} from '../../utils/types.ts';
 
-export const ReviewForm = () => {
+type ReviewFormProps = {
+  onSubmit: (form:TReviewFormState) => void;
+};
+
+export const ReviewForm: React.FC<ReviewFormProps> = ({ onSubmit: submit }) => {
 
   const [form, setForm] = useState<TReviewFormState>({
     comment: '',
@@ -16,8 +20,15 @@ export const ReviewForm = () => {
     });
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    submit(form);
+
+    setForm({comment: '', rating: 0});
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
 
       <ReviewRating value={form.rating} onChange={handleFormChange} />
