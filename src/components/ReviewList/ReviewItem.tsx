@@ -2,7 +2,7 @@ import React from 'react';
 import {TReview} from '../../utils/types.ts';
 import {dateToMonthWordYear, dateToYearMonthDay} from '../../utils/date.ts';
 import {Rating} from '../Rating/Rating.tsx';
-import {OBJECT_CLASS_TYPES} from '../../utils/const.ts';
+import {ObjectClass} from '../../utils/const.ts';
 
 interface IReviewItemProps {
   review: TReview;
@@ -17,10 +17,10 @@ export const ReviewItem: React.FC<IReviewItemProps> = ({review}) => (
       <span className="reviews__user-name">{review.user.name}</span>
     </div>
     <div className="reviews__info">
-      <Rating rating={review.rating} objectType={OBJECT_CLASS_TYPES.Reviews}/>
+      <Rating rating={review.rating} objectType={ObjectClass.Review}/>
       <p className="reviews__text">{review.comment}</p>
-      <time className="reviews__time" dateTime={dateToYearMonthDay(review.date)}>
-        {dateToMonthWordYear(review.date)}
+      <time className="reviews__time" dateTime={dateToYearMonthDay(new Date(review.date))}>
+        {dateToMonthWordYear(new Date(review.date))}
       </time>
     </div>
   </li>

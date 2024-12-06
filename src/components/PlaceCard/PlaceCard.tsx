@@ -2,7 +2,7 @@ import React, {MouseEventHandler} from 'react';
 import {TPlaceCard} from '../../utils/types.ts';
 import {Link} from 'react-router-dom';
 import {Rating} from '../Rating/Rating.tsx';
-import {OBJECT_CLASS_TYPES, PlaceClassTypes} from '../../utils/const.ts';
+import {ObjectClass, PlaceClassTypes} from '../../utils/const.ts';
 
 interface IPlaceCardProps {
   place: TPlaceCard;
@@ -28,7 +28,7 @@ export const PlaceCard: React.FC<IPlaceCardProps> = ({
       </div>
     )}
     <div className={`${placeCardType}__image-wrapper place-card__image-wrapper`}>
-      <a href="#">
+      <Link to={`/offer/${place.id}`}>
         <img
           className="place-card__image"
           src={place.previewImage}
@@ -36,7 +36,7 @@ export const PlaceCard: React.FC<IPlaceCardProps> = ({
           height={placeCardType !== PlaceClassTypes.Favorites ? '200' : '110'}
           alt='Alt'
         />
-      </a>
+      </Link>
     </div>
     <div className={`${placeCardType === PlaceClassTypes.Favorites ? 'favorites__card-info' : null} place-card__info`}>
       <div className="place-card__price-wrapper">
@@ -51,7 +51,7 @@ export const PlaceCard: React.FC<IPlaceCardProps> = ({
           <span className="visually-hidden">To bookmarks</span>
         </button>
       </div>
-      <Rating rating={place.rating} objectType={OBJECT_CLASS_TYPES.Place}/>
+      <Rating rating={place.rating} objectType={ObjectClass.Place}/>
       <h2 className="place-card__name">
         <Link to={`/offer/${place.id}`}>{place.title}</Link>
       </h2>

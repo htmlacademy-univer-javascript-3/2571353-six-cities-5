@@ -2,7 +2,7 @@ import {useMemo, useState} from 'react';
 import {TPlaceCard} from '../../utils/types.ts';
 import {OfferList} from '../../components/OfferList/OfferList.tsx';
 import {Map} from '../../components/map/map.tsx';
-import {PlaceClassTypes, SortName} from '../../utils/const.ts';
+import {LoadingStatus, PlaceClassTypes, SortName} from '../../utils/const.ts';
 import {CityList} from '../../components/city-list/CityList.tsx';
 import {useAppSelector} from '../../store/hooks.ts';
 import {SortFilter} from '../../components/sort-filter/SortFilter.tsx';
@@ -12,7 +12,7 @@ import {Header} from '../../components/header/header.tsx';
 export const Main = () => {
 
   const [selectedPlace, setSelectedPlace] = useState<TPlaceCard | undefined>(undefined);
-  const [currentFilter, setCurrentFilter] = useState<SortName>(SortName.POPULAR);
+  const [currentFilter, setCurrentFilter] = useState<SortName>(SortName.Popular);
 
   const currentCity = useAppSelector((state) => state.city);
   const currentOffers = useAppSelector((state) => state.offers);
@@ -32,11 +32,11 @@ export const Main = () => {
   const sortedOffers = useMemo(() => {
     const offers = currentOffers.filter((offer) => offer.city.name === currentCity.name);
     switch (currentFilter) {
-      case SortName.TOP_RATED:
+      case SortName.TopRated:
         return offers.toSorted((a, b) => b.rating - a.rating);
-      case SortName.HIGH_TO_LOW:
+      case SortName.HighToLow:
         return offers.toSorted((a, b) => b.price - a.price);
-      case SortName.LOW_TO_HIGH:
+      case SortName.LowToHigh:
         return offers.toSorted((a, b) => a.price - b.price);
       default:
         return offers;
@@ -61,7 +61,7 @@ export const Main = () => {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{sortedOffers?.length} places to stay in {currentCity.name}</b>
               <SortFilter currentFilter={currentFilter} onFilterChange={onFilterChange}/>
-              {isLoading
+              {isLoading !== LoadingStatus.Success
                 ? <Spinner/>
                 : <OfferList offers={sortedOffers} onListItemHover={handleListItemHover} listType={PlaceClassTypes.Cities}/>}
             </section>
