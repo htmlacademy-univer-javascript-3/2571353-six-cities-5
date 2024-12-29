@@ -2,13 +2,13 @@ import {FormEventHandler} from 'react';
 import {Navigate} from 'react-router-dom';
 import {Header} from '../../components/header/header.tsx';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
-import {AppRoute} from '../../utils/const.ts';
+import {Actions, AppRoute} from '../../utils/const.ts';
 import {userLogin} from '../../store/api-actions.ts';
 import {TAuthData} from '../../utils/types.ts';
 
 export const Login = () => {
   const dispatch = useAppDispatch();
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
+  const isAuthorized = useAppSelector((state) => state[Actions.User].authorizationStatus);
 
 
   const handleSubmit: FormEventHandler = (e) => {

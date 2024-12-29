@@ -1,9 +1,9 @@
-import {CITIES} from '../../utils/const.ts';
+import {Actions, CITIES} from '../../utils/const.ts';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
 import {changeCity} from '../../store/action.ts';
 
 export const CityList = () => {
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector((state) => state[Actions.City].city);
   const dispatch = useAppDispatch();
 
   return (

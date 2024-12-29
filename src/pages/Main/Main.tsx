@@ -1,27 +1,26 @@
 import {useMemo, useState} from 'react';
-import {TPlaceCard} from '../../utils/types.ts';
 import {OfferList} from '../../components/OfferList/OfferList.tsx';
 import {Map} from '../../components/map/map.tsx';
-import {LoadingStatus, PlaceClassTypes, SortName} from '../../utils/const.ts';
+import {Actions, LoadingStatus, PlaceClassTypes, SortName} from '../../utils/const.ts';
 import {CityList} from '../../components/city-list/CityList.tsx';
-import {useAppSelector} from '../../store/hooks.ts';
+import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
 import {SortFilter} from '../../components/sort-filter/SortFilter.tsx';
 import {Spinner} from '../../components/spinner/spinner.tsx';
 import {Header} from '../../components/header/header.tsx';
+import {setActiveOffer} from '../../store/action.ts';
 
 export const Main = () => {
-
-  const [selectedPlace, setSelectedPlace] = useState<TPlaceCard | undefined>(undefined);
+  const dispatch = useAppDispatch();
   const [currentFilter, setCurrentFilter] = useState<SortName>(SortName.Popular);
+  const currentCity = useAppSelector((state) => state[Actions.City].city);
+  const currentOffers = useAppSelector((state) => state[Actions.Offers].offers);
+  const isLoading = useAppSelector((state) => state[Actions.Offers].isOffersDataLoading);
 
-  const currentCity = useAppSelector((state) => state.city);
-  const currentOffers = useAppSelector((state) => state.offers);
-  const isLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const selectedPlaceId = useAppSelector((state) => state[Actions.Offer].activeOffer);
 
-  const handleListItemHover = (placeItemId: string | null) => {
-    const currentPlace = currentOffers.find((place) => place.id === placeItemId);
-    if (selectedPlace !== currentPlace) {
-      setSelectedPlace(currentPlace);
+  const handleListItemHover = (placeItemId: string | undefined) => {
+    if (selectedPlaceId !== placeItemId) {
+      dispatch(setActiveOffer(placeItemId));
     }
   };
 
@@ -67,7 +66,7 @@ export const Main = () => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={currentCity} places={sortedOffers} selectedPlace={selectedPlace}/>
+                <Map city={currentCity} places={sortedOffers} />
               </section>
             </div>
           </div>

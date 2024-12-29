@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
-import {AppRoute} from '../../utils/const.ts';
+import {Actions, AppRoute} from '../../utils/const.ts';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
 import {userLogout} from '../../store/api-actions.ts';
 
@@ -8,8 +8,8 @@ export const Header = () => {
   const isLoginPage = location.pathname === AppRoute.Login.toString();
 
   const dispatch = useAppDispatch();
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const isAuthorized = useAppSelector((state) => state[Actions.User].authorizationStatus);
+  const userData = useAppSelector((state) => state[Actions.User].userData);
 
   const handleLogout = () => {
     dispatch(userLogout());

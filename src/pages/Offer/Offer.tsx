@@ -1,14 +1,14 @@
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect} from 'react';
 import {Navigate, useParams} from 'react-router-dom';
 import {ReviewsList} from '../../components/ReviewList/ReviewsList.tsx';
 import {Map} from '../../components/map/map.tsx';
 import {OfferList} from '../../components/OfferList/OfferList.tsx';
-import {LoadingStatus, ObjectClass, PlaceClassTypes} from '../../utils/const.ts';
-import {TPlaceCard, TReviewFormState} from '../../utils/types.ts';
+import {Actions, LoadingStatus, ObjectClass, PlaceClassTypes} from '../../utils/const.ts';
+import {TReviewFormState} from '../../utils/types.ts';
 import {useAppDispatch, useAppSelector} from '../../store/hooks.ts';
 import {Header} from '../../components/header/header.tsx';
 import {createComment, fetchComments, fetchOffer, fetchOffersNearby} from '../../store/api-actions.ts';
-import {clearComments, clearNearbyOffers, clearOffer} from '../../store/action.ts';
+import {clearComments, clearNearbyOffers, clearOffer, setActiveOffer} from '../../store/action.ts';
 import {Spinner} from '../../components/spinner/spinner.tsx';
 import {Rating} from '../../components/Rating/Rating.tsx';
 import {ReviewForm} from '../../components/ReviewList/ReviewForm.tsx';
@@ -17,19 +17,17 @@ export const Offer = () => {
   const {id} = useParams();
   const dispatch = useAppDispatch();
 
-  const [selectedPlace, setSelectedPlace] = useState<TPlaceCard | undefined>(undefined);
+  const isAuthorized = useAppSelector((state) => state[Actions.User].authorizationStatus);
+  const city = useAppSelector((state) => state[Actions.City].city);
 
-  const isAuthorized = useAppSelector((state) => state.authorizationStatus);
-  const city = useAppSelector((state) => state.city);
+  const offer = useAppSelector((state) => state[Actions.Offer].offer);
+  const isOfferDataLoading = useAppSelector((state) => state[Actions.Offer].isOfferDataLoading);
 
-  const offer = useAppSelector((state) => state.offer);
-  const isOfferDataLoading = useAppSelector((state) => state.isOfferDataLoading);
+  const nearbyOffers = useAppSelector((state) => state[Actions.Offers].nearbyOffers);
+  const isOffersDataLoading = useAppSelector((state) => state[Actions.Offers].isOffersDataLoading);
 
-  const nearbyOffers = useAppSelector((state) => state.nearbyOffers);
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-
-  const reviews = useAppSelector((state) => state.comments);
-  const isCommentsDataLoading = useAppSelector((state) => state.isCommentsDataLoading);
+  const reviews = useAppSelector((state) => state[Actions.Comment].comments);
+  const isCommentsDataLoading = useAppSelector((state) => state[Actions.Comment].isCommentsDataLoading);
 
   useEffect(() => {
     if (!id) {
@@ -55,9 +53,8 @@ export const Offer = () => {
     };
   }, [dispatch, id, offer]);
 
-  const handleListItemHover = (placeItemId: string | null) => {
-    const currentPlace = nearbyOffers.find((place) => place.id === placeItemId);
-    setSelectedPlace(currentPlace);
+  const handleListItemHover = (placeItemId: string | undefined) => {
+    dispatch(setActiveOffer(placeItemId));
   };
 
   const submitComment = useCallback((form: TReviewFormState) => {
@@ -171,7 +168,7 @@ export const Offer = () => {
               </div>
             </div>
             <section className="offer__map map">
-              <Map city={city} places={nearbyOffers} selectedPlace={selectedPlace}/>
+              <Map city={city} places={nearbyOffers}/>
             </section>
           </section>
         )}

@@ -13,6 +13,7 @@ export const clearNearbyOffers = createAction(`${Actions.Offers}/clearNearby`);
 export const setOffer = createAction<TPlaceCardFull>(`${Actions.Offer}/set`);
 export const clearOffer = createAction(`${Actions.Offer}/clear`);
 export const setOfferLoadingStatus = createAction<LoadingStatus>(`${Actions.Offer}/loading`);
+export const setActiveOffer = createAction<string | undefined>(`${Actions.Offer}/setActive`);
 
 export const setAuthorizationStatus = createAction<boolean>(`${Actions.User}/authorization`);
 export const setUserData = createAction<TUserFull>(`${Actions.User}/setData`);
