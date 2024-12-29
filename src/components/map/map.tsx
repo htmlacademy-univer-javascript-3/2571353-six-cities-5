@@ -3,11 +3,12 @@ import {TCity, TPlaceCard} from '../../utils/types.ts';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
+import {useAppSelector} from '../../store/hooks.ts';
+import {Actions} from '../../utils/const.ts';
 
 type MapProps = {
   city: TCity;
   places: TPlaceCard[];
-  selectedPlace: TPlaceCard | undefined;
 };
 
 const defaultCustomIcon = new Icon({
@@ -23,7 +24,9 @@ const currentCustomIcon = new Icon({
 });
 
 export const Map: React.FC<MapProps> = (props: MapProps) => {
-  const {city, places, selectedPlace} = props;
+  const {city, places} = props;
+
+  const selectedPlaceId = useAppSelector((state) => state[Actions.Offer].activeOffer);
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -39,7 +42,7 @@ export const Map: React.FC<MapProps> = (props: MapProps) => {
 
         marker
           .setIcon(
-            selectedPlace !== undefined && place.id === selectedPlace.id
+            selectedPlaceId !== undefined && place.id === selectedPlaceId
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -50,7 +53,7 @@ export const Map: React.FC<MapProps> = (props: MapProps) => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, places, selectedPlace]);
+  }, [map, places, selectedPlaceId]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 };

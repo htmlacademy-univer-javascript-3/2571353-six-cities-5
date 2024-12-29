@@ -119,7 +119,7 @@ export const createComment = createAsyncThunk<void, { form: TReviewFormState } &
 
     const state = getState();
 
-    if (status === Number(StatusCodes.CREATED) && state.offer?.id === offerId) {
+    if (status === Number(StatusCodes.CREATED) && state[Actions.Offer].offer?.id === offerId) {
       dispatch(fetchComments(offerId));
     }
   },
