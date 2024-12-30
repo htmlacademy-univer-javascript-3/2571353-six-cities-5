@@ -6,7 +6,6 @@ import {Offer} from './pages/Offer/Offer.tsx';
 import {NotFound} from './pages/NotFoundPage/NotFound.tsx';
 import {AppRoute} from './utils/const.ts';
 import {PrivateRoute} from './PrivateRoute.tsx';
-import {favorites} from './mocks/favorites.ts';
 
 export const App = () => (
   <BrowserRouter>
@@ -15,7 +14,7 @@ export const App = () => (
       <Route path={AppRoute.Login} element={<Login/>}/>
       <Route path={AppRoute.Favorites} element={
         <PrivateRoute>
-          <Favorites places={favorites}/>
+          <Favorites />
         </PrivateRoute>
       }
       />

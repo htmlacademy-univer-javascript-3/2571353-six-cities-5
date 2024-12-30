@@ -26,8 +26,8 @@ export const Offer = () => {
   const nearbyOffers = useAppSelector((state) => state[Actions.Offers].nearbyOffers);
   const isOffersDataLoading = useAppSelector((state) => state[Actions.Offers].isOffersDataLoading);
 
-  const reviews = useAppSelector((state) => state[Actions.Comment].comments);
-  const isCommentsDataLoading = useAppSelector((state) => state[Actions.Comment].isCommentsDataLoading);
+  const reviews = useAppSelector((state) => state[Actions.Comments].comments);
+  const isCommentsDataLoading = useAppSelector((state) => state[Actions.Comments].isCommentsDataLoading);
 
   useEffect(() => {
     if (!id) {

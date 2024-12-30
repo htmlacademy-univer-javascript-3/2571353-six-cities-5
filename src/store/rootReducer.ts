@@ -5,6 +5,7 @@ import {offersReducer} from './reducers/offersReducer.ts';
 import {offerReducer} from './reducers/offerReducer.ts';
 import {commentsReducer} from './reducers/commentsReducer.ts';
 import {Actions} from '../utils/const.ts';
+import {favoritesReducer} from './reducers/favoritesReducer.ts';
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   [Actions.City]: cityReducer,
   [Actions.Offers]: offersReducer,
   [Actions.Offer]: offerReducer,
-  [Actions.Comment]: commentsReducer,
+  [Actions.Comments]: commentsReducer,
+  [Actions.Favorites]: favoritesReducer,
 });
 
 export {rootReducer};

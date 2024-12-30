@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import {store} from './store';
-import {fetchOffers, userCheckAuth} from './store/api-actions.ts';
+import {fetchFavorites, fetchOffers, userCheckAuth} from './store/api-actions.ts';
 import {App} from './App.tsx';
 
 (function initApp() {
-  store.dispatch(fetchOffers());
   store.dispatch(userCheckAuth());
+  store.dispatch(fetchOffers());
+  store.dispatch(fetchFavorites());
 })();
 
 const root = ReactDOM.createRoot(

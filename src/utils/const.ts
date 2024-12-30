@@ -30,8 +30,8 @@ export enum Actions {
   City = 'City',
   Offers = 'Offers',
   Offer = 'Offer',
-  Favorite = 'Favorite',
-  Comment = 'Comment',
+  Favorites = 'Favorites',
+  Comments = 'Comments',
   User = 'User'
 }
 
@@ -109,7 +109,7 @@ export const API_ROUTES = {
   },
   FAVORITE: {
     GET: '/favorite',
-    SET_STATUS: (offerId: string, status: boolean) => `/favorite/${offerId}/${status}`,
+    SET_STATUS: (offerId: string, status: number) => `/favorite/${offerId}/${status}`,
   },
   COMMENTS: {
     GET: (offerId: string) => `/comments/${offerId}`,
