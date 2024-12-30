@@ -5,7 +5,7 @@ import {
   clearUserData,
   fillOffers,
   setAuthorizationStatus,
-  setComments, setCommentsLoadingStatus, setNearbyOffers,
+  setComments, setCommentsLoadingStatus, setFavorites, setFavoritesLoadingStatus, setNearbyOffers,
   setOffer,
   setOfferLoadingStatus,
   setOffersLoadingStatus,
@@ -69,7 +69,13 @@ export const fetchOffers = createAsyncThunk<void, undefined, DispatchStateExtra>
   `${Actions.Offers}/fetch`,
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersLoadingStatus(LoadingStatus.Pending));
-    const {data} = await api.get<TPlaceCard[]>(API_ROUTES.OFFERS.ALL);
+    const {status, data} = await api.get<TPlaceCard[]>(API_ROUTES.OFFERS.ALL);
+
+    if (status === Number(StatusCodes.NOT_FOUND)) {
+      dispatch(setOffersLoadingStatus(LoadingStatus.Failure));
+      return;
+    }
+
     dispatch(fillOffers(data));
     dispatch(setOffersLoadingStatus(LoadingStatus.Success));
   },
@@ -103,7 +109,7 @@ export const fetchOffersNearby = createAsyncThunk<void, string, DispatchStateExt
 );
 
 export const fetchComments = createAsyncThunk<void, string, DispatchStateExtra>(
-  `${Actions.Comment}/fetch`,
+  `${Actions.Comments}/fetch`,
   async (id, { dispatch, extra: api }) => {
     dispatch(setOffersLoadingStatus(LoadingStatus.Pending));
     const { data: comments } = await api.get<TReview[]>(API_ROUTES.COMMENTS.GET(id));
@@ -113,7 +119,7 @@ export const fetchComments = createAsyncThunk<void, string, DispatchStateExtra>(
 );
 
 export const createComment = createAsyncThunk<void, { form: TReviewFormState } & { offerId: string }, DispatchStateExtra>(
-  `${Actions.Comment}/create`,
+  `${Actions.Comments}/create`,
   async ({ offerId, form }, { dispatch, getState, extra: api }) => {
     const { status } = await api.post<TReviewFormState>(API_ROUTES.COMMENTS.POST(offerId), form);
 
@@ -121,6 +127,33 @@ export const createComment = createAsyncThunk<void, { form: TReviewFormState } &
 
     if (status === Number(StatusCodes.CREATED) && state[Actions.Offer].offer?.id === offerId) {
       dispatch(fetchComments(offerId));
+    }
+  },
+);
+
+export const fetchFavorites = createAsyncThunk<void, undefined, DispatchStateExtra>(
+  `${Actions.Favorites}/fetch`,
+  async (_arg, {dispatch, extra: api}) => {
+    dispatch(setFavoritesLoadingStatus(LoadingStatus.Pending));
+    const {status, data} = await api.get<TPlaceCard[]>(API_ROUTES.FAVORITE.GET);
+    if (status === Number(StatusCodes.NOT_FOUND)) {
+      dispatch(setFavoritesLoadingStatus(LoadingStatus.Failure));
+      return;
+    }
+
+    dispatch(setFavorites(data));
+    dispatch(setFavoritesLoadingStatus(LoadingStatus.Success));
+  },
+);
+
+export const changeFavorite = createAsyncThunk<void, { offerId: string; favoriteStatus: boolean }, DispatchStateExtra>(
+  `${Actions.Favorites}/change`,
+  async ({ offerId, favoriteStatus }, { dispatch, extra: api }) => {
+    const { status } = await api.post<TReviewFormState>(API_ROUTES.FAVORITE.SET_STATUS(offerId, favoriteStatus ? 1 : 0));
+
+    if ((status === Number(StatusCodes.CREATED) || status === Number(StatusCodes.OK))) {
+      dispatch(fetchFavorites());
+      dispatch(fetchOffers());
     }
   },
 );

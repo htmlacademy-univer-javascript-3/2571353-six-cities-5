@@ -10,6 +10,7 @@ export const Header = () => {
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector((state) => state[Actions.User].authorizationStatus);
   const userData = useAppSelector((state) => state[Actions.User].userData);
+  const favoritesLength = useAppSelector((state) => state[Actions.Favorites].favorites).length;
 
   const handleLogout = () => {
     dispatch(userLogout());
@@ -40,7 +41,7 @@ export const Header = () => {
                         <span className="header__user-name user__name">
                           {userData?.name}
                         </span>
-                        <span className="header__favorite-count">fav_count</span>
+                        <span className="header__favorite-count">{favoritesLength}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">
