@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { App } from './App';
 import {Actions, AppRoute, LoadingStatus} from './utils/const';
-import {initAsyncActionsStore, mockState} from './utils/mocks.ts';
+import {initAsyncActionsStore, mockState} from './utils/mocks.tsx';
 
 const {mockStoreCreator} = initAsyncActionsStore();
 

@@ -6,6 +6,8 @@ import {createAPI} from '../api/api.ts';
 import {State} from './state.ts';
 import {Actions, LoadingStatus} from './const.ts';
 import {TRootReducer} from '../store/rootReducer.ts';
+import {createMemoryHistory, MemoryHistory} from 'history';
+import {HistoryRouter} from './HistoryRouter';
 
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
@@ -18,6 +20,16 @@ export const initAsyncActionsStore = () => {
 
   return {mockAxios, mockStoreCreator};
 };
+
+export function withHistory(component: JSX.Element, history?: MemoryHistory) {
+  const memoryHistory = history ?? createMemoryHistory();
+
+  return (
+    <HistoryRouter history={memoryHistory}>
+      {component}
+    </HistoryRouter>
+  );
+}
 
 export const mockState: TRootReducer = {
   [Actions.User]: {
