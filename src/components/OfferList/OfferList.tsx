@@ -14,6 +14,7 @@ export const OfferList: React.FC<IOfferListProps> = ({offers, onListItemHover, l
     `${listType === PlaceClassTypes.Cities ? 'cities__places-list' : 'near-places__list'} places__list
     ${listType === PlaceClassTypes.Cities ? 'tabs__content' : null}`
   }
+  data-testid="offer-list-container"
   >
     {offers.map((place) => (
       <PlaceCard

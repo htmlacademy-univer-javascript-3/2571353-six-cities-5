@@ -55,5 +55,5 @@ export const Map: React.FC<MapProps> = (props: MapProps) => {
     }
   }, [map, places, selectedPlaceId]);
 
-  return <div style={{height: '100%'}} ref={mapRef}></div>;
+  return <div style={{height: '100%'}} ref={mapRef} data-testid='map-test'></div>;
 };
