@@ -5,6 +5,7 @@ import {ToastContainer} from 'react-toastify';
 import {store} from './store';
 import {fetchFavorites, fetchOffers, userCheckAuth} from './store/api-actions.ts';
 import {App} from './App.tsx';
+import {BrowserRouter} from 'react-router-dom';
 
 (function initApp() {
   store.dispatch(userCheckAuth());
@@ -19,7 +20,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
       <ToastContainer />
     </Provider>
   </React.StrictMode>

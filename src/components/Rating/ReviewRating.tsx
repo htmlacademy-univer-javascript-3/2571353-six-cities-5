@@ -1,7 +1,6 @@
 import React from 'react';
 import {COMMENT_STARS} from '../../utils/const.ts';
 
-
 type IReviewRatingProps = {
   value: number;
   onChange: (field: string, value: number) => void;

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ReviewRating} from '../Rating/ReviewRaiting.tsx';
+import {ReviewRating} from '../Rating/ReviewRating.tsx';
 import {TReviewFormState} from '../../utils/types.ts';
 
 type ReviewFormProps = {
