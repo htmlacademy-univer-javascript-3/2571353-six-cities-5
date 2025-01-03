@@ -3,7 +3,7 @@ import {
   fetchFavorites, changeFavorite,
 } from './api-actions';
 import {LoadingStatus} from '../utils/const';
-import {initAsyncActionsStore, mockState} from '../utils/mocks.ts';
+import {initAsyncActionsStore, mockState} from '../utils/mocks.tsx';
 
 const {mockAxios, mockStoreCreator} = initAsyncActionsStore();
 

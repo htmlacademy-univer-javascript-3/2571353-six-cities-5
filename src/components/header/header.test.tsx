@@ -4,7 +4,7 @@ import { vi } from 'vitest';
 import { Header } from './header';
 import {Actions, AppRoute} from '../../utils/const';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import {mockState} from '../../utils/mocks.ts';
+import {mockState} from '../../utils/mocks.tsx';
 
 vi.mock('../../store/hooks', () => ({
   useAppSelector: vi.fn(),
