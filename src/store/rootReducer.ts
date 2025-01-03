@@ -18,3 +18,5 @@ const rootReducer = combineReducers({
 });
 
 export {rootReducer};
+
+export type TRootReducer = ReturnType<typeof rootReducer>;
