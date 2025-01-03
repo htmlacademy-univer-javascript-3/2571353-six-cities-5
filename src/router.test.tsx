@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { App } from './App';
+import { App } from './app.tsx';
 import {Actions, AppRoute, LoadingStatus} from './utils/const';
 import {initAsyncActionsStore, mockState} from './utils/mocks.tsx';
 
@@ -14,7 +14,7 @@ describe('App Routing', () => {
     store = mockStoreCreator(mockState);
   });
 
-  it('should render Main page for "/" route', () => {
+  it('should render main page for "/" route', () => {
     render(
       <Provider store={store}>
         <MemoryRouter initialEntries={[AppRoute.Main]}>
@@ -26,7 +26,7 @@ describe('App Routing', () => {
     expect(screen.getByText(/Cities/i)).toBeInTheDocument();
   });
 
-  it('should render Login page for "/login" route', () => {
+  it('should render login page for "/login" route', () => {
     render(
       <Provider store={store}>
         <MemoryRouter initialEntries={[AppRoute.Login]}>
@@ -38,7 +38,7 @@ describe('App Routing', () => {
     expect(screen.getByText(/Password/i)).toBeInTheDocument();
   });
 
-  it('should render Favorites page for "/favorites" route if authorized', () => {
+  it('should render favorites page for "/favorites" route if authorized', () => {
     const mockStateCopy = structuredClone(mockState);
 
     mockStateCopy[Actions.User].authorizationStatus = true;
@@ -55,7 +55,7 @@ describe('App Routing', () => {
     expect(screen.getByText(/Saved listing/i)).toBeInTheDocument();
   });
 
-  it('should render Offer page for "/offer/:id" route', () => {
+  it('should render offer page for "/offer/:id" route', () => {
     render(
       <Provider store={store}>
         <MemoryRouter initialEntries={[AppRoute.Offer.replace(':id', '1')]}>

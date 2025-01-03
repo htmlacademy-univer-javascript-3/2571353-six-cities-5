@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {ToastContainer} from 'react-toastify';
 import {store} from './store';
 import {fetchFavorites, fetchOffers, userCheckAuth} from './store/api-actions.ts';
-import {App} from './App.tsx';
+import {App} from './app.tsx';
 import {BrowserRouter} from 'react-router-dom';
 
 (function initApp() {

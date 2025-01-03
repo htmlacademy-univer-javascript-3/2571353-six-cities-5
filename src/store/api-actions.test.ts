@@ -66,18 +66,18 @@ describe('Async actions', () => {
 
     const actions = store.getActions();
     expect(actions).toEqual([
-      expect.objectContaining({type: 'User/login/pending'}),
+      expect.objectContaining({type: 'User/check/pending'}),
       {type: 'User/authorization', payload: true},
       {type: 'User/setData', payload: mockUserData},
-      expect.objectContaining({type: 'User/login/fulfilled'}),
+      expect.objectContaining({type: 'User/check/fulfilled'}),
     ]);
   });
 
-  it('should dispatch fillOffers and setOffersLoadingStatus on fetchOffers', async () => {
+  it('should dispatch setOffers and setOffersLoadingStatus on fetchOffers', async () => {
     const mockOffers = [
       {
         id: '1',
-        title: 'Mock Offer',
+        title: 'Mock offer',
         type: 'apartment',
         price: 100,
         isFavorite: false,
@@ -95,7 +95,7 @@ describe('Async actions', () => {
     expect(actions).toEqual([
       expect.objectContaining({type: 'Offers/fetch/pending'}),
       {type: 'Offers/loading', payload: LoadingStatus.Pending},
-      {type: 'Offers/fill', payload: mockOffers},
+      {type: 'Offers/set', payload: mockOffers},
       {type: 'Offers/loading', payload: LoadingStatus.Success},
       expect.objectContaining({type: 'Offers/fetch/fulfilled'}),
     ]);
@@ -104,7 +104,7 @@ describe('Async actions', () => {
   it('should dispatch setOffer and setOfferLoadingStatus on fetchOffer', async () => {
     const mockOffer = {
       id: '1',
-      title: 'Mock Offer',
+      title: 'Mock offer',
       type: 'apartment',
       price: 100,
       isFavorite: false,
@@ -131,7 +131,7 @@ describe('Async actions', () => {
     const mockNearbyOffers = [
       {
         id: '2',
-        title: 'Nearby Offer',
+        title: 'Nearby offer',
         type: 'room',
         price: 80,
         isFavorite: false,
@@ -218,7 +218,7 @@ describe('Async actions', () => {
     const mockFavorites = [
       {
         id: '1',
-        title: 'Favorite Offer',
+        title: 'Favorite offer',
         type: 'house',
         price: 200,
         isFavorite: true,
@@ -236,7 +236,7 @@ describe('Async actions', () => {
     expect(actions).toEqual([
       expect.objectContaining({type: 'Favorites/fetch/pending'}),
       {type: 'Favorites/loading', payload: LoadingStatus.Pending},
-      {type: 'Favorites/fill', payload: mockFavorites},
+      {type: 'Favorites/set', payload: mockFavorites},
       {type: 'Favorites/loading', payload: LoadingStatus.Success},
       expect.objectContaining({type: 'Favorites/fetch/fulfilled'}),
     ]);

@@ -3,7 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {StatusCodes} from 'http-status-codes';
 import {
   clearUserData,
-  fillOffers,
+  setOffers,
   setAuthorizationStatus,
   setComments, setCommentsLoadingStatus, setFavorites, setFavoritesLoadingStatus, setNearbyOffers,
   setOffer,
@@ -51,7 +51,7 @@ export const userLogout = createAsyncThunk<void, undefined, DispatchStateExtra>(
 );
 
 export const userCheckAuth = createAsyncThunk<void, undefined, DispatchStateExtra>(
-  `${Actions.User}/login`,
+  `${Actions.User}/check`,
   async (_arg, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<TUserFull>(API_ROUTES.USER.VALIDATE);
@@ -76,7 +76,7 @@ export const fetchOffers = createAsyncThunk<void, undefined, DispatchStateExtra>
       return;
     }
 
-    dispatch(fillOffers(data));
+    dispatch(setOffers(data));
     dispatch(setOffersLoadingStatus(LoadingStatus.Success));
   },
 );

@@ -5,10 +5,9 @@ import thunk, {ThunkDispatch} from 'redux-thunk';
 import {createAPI} from '../api/api.ts';
 import {State} from './state.ts';
 import {Actions, LoadingStatus} from './const.ts';
-import {TRootReducer} from '../store/rootReducer.ts';
+import {TRootReducer} from '../store/root-reducer.ts';
 import {createMemoryHistory, MemoryHistory} from 'history';
-import {HistoryRouter} from './HistoryRouter';
-
+import {HistoryRouter} from './history-router.tsx';
 
 type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof createAPI>, Action>;
 
@@ -57,7 +56,7 @@ export const mockState: TRootReducer = {
     activeOffer: '1',
     offer: {
       id: '1',
-      title: 'Test Offer',
+      title: 'Test offer',
       type: 'apartment',
       price: 100,
       isFavorite: false,

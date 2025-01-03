@@ -1,8 +1,8 @@
+import 'leaflet/dist/leaflet.css';
 import React, {useEffect, useRef} from 'react';
 import {TCity, TPlaceCard} from '../../utils/types.ts';
 import {Icon, layerGroup, Marker} from 'leaflet';
 import useMap from '../../hooks/use-map.tsx';
-import 'leaflet/dist/leaflet.css';
 import {useAppSelector} from '../../store/hooks.ts';
 import {Actions} from '../../utils/const.ts';
 

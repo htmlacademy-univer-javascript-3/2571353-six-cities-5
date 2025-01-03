@@ -4,7 +4,7 @@ import {Actions, LoadingStatus} from '../utils/const.ts';
 
 export const changeCity = createAction<TCity>(`${Actions.City}/change`);
 
-export const fillOffers = createAction<TPlaceCard[]>(`${Actions.Offers}/fill`);
+export const setOffers = createAction<TPlaceCard[]>(`${Actions.Offers}/set`);
 export const setOffersLoadingStatus = createAction<LoadingStatus>(`${Actions.Offers}/loading`);
 
 export const setNearbyOffers = createAction<TPlaceCard[]>(`${Actions.Offers}/nearby`);
@@ -23,5 +23,5 @@ export const setComments = createAction<TReview[]>(`${Actions.Comments}/set`);
 export const clearComments = createAction(`${Actions.Comments}/clear`);
 export const setCommentsLoadingStatus = createAction<LoadingStatus>(`${Actions.Comments}/loading`);
 
-export const setFavorites = createAction<TPlaceCard[]>(`${Actions.Favorites}/fill`);
+export const setFavorites = createAction<TPlaceCard[]>(`${Actions.Favorites}/set`);
 export const setFavoritesLoadingStatus = createAction<LoadingStatus>(`${Actions.Favorites}/loading`);
